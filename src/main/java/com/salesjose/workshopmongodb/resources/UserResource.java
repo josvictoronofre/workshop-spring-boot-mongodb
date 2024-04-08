@@ -26,4 +26,9 @@ public class UserResource {
         List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<UserDTO> findById(String id) {
+        User user = service.findById(id);
+        return ResponseEntity.ok().body(new UserDTO(user));
+    }
 }
