@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.salesjose.workshopmongodb.domain.User;
 import com.salesjose.workshopmongodb.dto.UserDTO;
 import com.salesjose.workshopmongodb.services.UserService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping(value = "/users")
@@ -50,6 +52,14 @@ public class UserResource {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody UserDTO userDto, @PathVariable String id) {
+        User user = service.fromDto(userDto);
+        user.setId(id);
+        user = service.update(user);
         return ResponseEntity.noContent().build();
     }
 }
