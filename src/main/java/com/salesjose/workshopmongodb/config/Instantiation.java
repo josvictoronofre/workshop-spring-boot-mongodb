@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.aggregation.DateOperators.Timezone;
 
 import com.salesjose.workshopmongodb.domain.Post;
 import com.salesjose.workshopmongodb.domain.User;
+import com.salesjose.workshopmongodb.dto.AuthorDTO;
 import com.salesjose.workshopmongodb.repositories.PostRepository;
 import com.salesjose.workshopmongodb.repositories.UserRepository;
 
@@ -36,11 +37,12 @@ public class Instantiation implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços",
-        maria);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", maria);
-        
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços",
+        new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+        
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 
