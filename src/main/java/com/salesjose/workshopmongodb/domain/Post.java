@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.salesjose.workshopmongodb.dto.AuthorDTO;
 
-@Document
+@Document(collection = "post")
 public class Post implements Serializable {
 
     @Id
